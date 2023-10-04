@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group">
+    <a href="{% url 'laptop' %}" class="list-group-item list-group-list-action" aria-current="true">All Laptops</a>
+    <a href="{% url 'laptopdata' 'Apple' %}" class="list-group-item list-group-list-action" aria-current="true">Apple</a>
+    <a href="{% url 'laptopdata' 'Samsung' %}" class="list-group-item list-group-list-action" aria-current="true">Samsung</a>
+    <a href="{% url 'laptopdata' 'Dell' %}" class="list-group-item list-group-list-action" aria-current="true">Dell</a>
+    <a href="{% url 'laptopdata' 'HP' %}" class="list-group-item list-group-list-action" aria-current="true">HP</a>
+    <a href="{% url 'laptopdata' 'Below' %}" class="list-group-item list-group-list-action" aria-current="true">Below 100000</a>
+    <a href="{% url 'laptopdata' 'Above' %}" class="list-group-item list-group-list-action" aria-current="true">Above 100000</a>
+   </div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+    {% for product in laptop %}
+   <div class="col-sm-4 text-center mb-4">
+    <a href="{% url 'product-detail' product.id %}" class="btn">
+        <div class="item">
+            <img src="{{product.product_image.url}}" alt="" height="200" width="250" class="">
+            <br>
+            <div class="fw-bold">{{product.title}}</div>
+            <div class="fw-bold">Rs. {{product.discounted_price}}
+                <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small>
+            </div>
+        </div>
+    </a>
+    </div> 
+    {% endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
